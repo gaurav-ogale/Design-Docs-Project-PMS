@@ -1,0 +1,9 @@
+diagnose_id,description
+1,Adult diagnoses
+2,Newborn diagnoses
+3,Pediatric diagnoses
+4,Maternity diagnoses
+5,Diagnoses for females only
+6,Diagnoses for males only
+7,Manifestation diagnoses
+8,Mental health diagnoses
