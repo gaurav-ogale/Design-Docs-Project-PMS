@@ -9,5 +9,7 @@ public interface UserGroupService {
 	String addUserGroup(UserGroup userGroup);
 	
 	List<UserGroup> getAllUserGroup();
+	
+
 
 }

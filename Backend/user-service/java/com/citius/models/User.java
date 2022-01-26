@@ -4,17 +4,19 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "userData")
+@Table(name = "users")
 public class User {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "userId")
+	@GeneratedValue(strategy=GenerationType.AUTO) 
+	@Column(name = "user_Id")
 	private Long userID;
 	private String userTitle;
 	private String userFirstName;
@@ -23,25 +25,19 @@ public class User {
 	private String userDOB;
 	private String userContactNo;
 	private String password;
-	@OneToOne(targetEntity=UserGroup.class,cascade=CascadeType.ALL)
+//	@ManyToOne(cascade=CascadeType.PERSIST)
+//	@JoinColumn(name="user_group_id" , nullable = false)
+//	private UserGroup userGroup;
+	
+//	@OneToMany(mappedBy = "user" , cascade = CascadeType.PERSIST)
+//	private List<UserGroup> userGroups;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "userGroupId")
 	private UserGroup userGroup;
 
 	public User() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public User(Long userID, String userTitle, String userFirstName, String userLastName, String userEmail,
-			String userDOB, String userContactNo, String password, UserGroup userGroup) {
-		super();
-		this.userID = userID;
-		this.userTitle = userTitle;
-		this.userFirstName = userFirstName;
-		this.userLastName = userLastName;
-		this.userEmail = userEmail;
-		this.userDOB = userDOB;
-		this.userContactNo = userContactNo;
-		this.password = password;
-		this.userGroup = userGroup;
 	}
 
 	public Long getUserID() {
@@ -116,12 +112,9 @@ public class User {
 		this.userGroup = userGroup;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userID=" + userID + ", userTitle=" + userTitle + ", userFirstName=" + userFirstName
-				+ ", userLastName=" + userLastName + ", userEmail=" + userEmail + ", userDOB=" + userDOB
-				+ ", userContactNo=" + userContactNo + ", password=" + password + ", userGroup=" + userGroup + "]";
-	}
+
+
+	
 	
 	
 
