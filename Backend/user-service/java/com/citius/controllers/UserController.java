@@ -19,7 +19,6 @@ import com.citius.services.UserGroupService;
 import com.citius.services.UserService;
 
 @RestController
-@RequestMapping("api/v1")
 public class UserController {
 
 	@Autowired
