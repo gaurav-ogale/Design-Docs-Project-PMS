@@ -1,6 +1,7 @@
 package com.citius.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.citius.config.TokenManager;
 import com.citius.models.AuthUser;
 import com.citius.models.JwtResponse;
+import com.citius.models.UserModel;
 import com.citius.services.CustomUserDetailsService;
-import com.citius.utilities.JwtUtils;
-import com.netflix.discovery.converters.Auto;
 
 @RestController
 @CrossOrigin
@@ -51,6 +51,13 @@ public class ApiGatewayController {
 		final UserDetails userDetails = customDetailsService.loadUserByUsername(request.getUsername());
 		final String jwtToken = tokenManager.generateJwtToken(userDetails);
 		return ResponseEntity.ok(new JwtResponse(jwtToken));
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<?> registerUser(@RequestBody UserModel user){
+		HttpStatus status= customDetailsService.registerUser(user);		
+		return new ResponseEntity<HttpStatus>(status); 
+		
 	}
 
 }
